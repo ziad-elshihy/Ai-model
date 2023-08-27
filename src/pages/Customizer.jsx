@@ -100,10 +100,7 @@ const Customizer = () => {
                   <div className="flex items-center min-h-screen">
                      <button
                         style={generateStyle()}
-                        className={isActive
-                           ? "fixed top-5 left-5 text-white bg-black flex-1 rounded-md w-fit px-4 py-2.5 font-bold text-sm"
-                           : `fixed left-5 flex-1 rounded-md w-fit px-4 py-2.5 font-bold text-sm text-white bg-${state.color}`
-                        }
+                        className={`fixed top-5 left-5 flex-1 rounded-md w-fit px-4 py-2.5 font-bold text-sm text-white bg-${state.color}`}
                         onClick={() => setIsActive(!isActive)}
                      >
                         {isActive ? "Close Editor" : "Start Editor"}
