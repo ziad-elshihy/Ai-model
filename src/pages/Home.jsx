@@ -9,11 +9,10 @@ import {
    headTextAnimation,
    slideAnimation
 } from '../config/motion';
-
 const Home = () => {
    const snap = useSnapshot(state);
-
    return (
+
       <AnimatePresence>
          {snap.intro && (
             <motion.section className="home" {...slideAnimation('left')}>

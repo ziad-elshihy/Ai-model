@@ -18,7 +18,7 @@ const Customizer = () => {
 
    const [prompt, setPrompt] = useState('');
    const [generatingImg, setGeneratingImg] = useState(false);
-
+   const [isActive, setIsActive] = useState(false);
    const [activeEditorTab, setActiveEditorTab] = useState("");
    const [activeFilterTab, setActiveFilterTab] = useState({
       logoShirt: true,
@@ -83,7 +83,11 @@ const Customizer = () => {
             setActiveEditorTab("");
          })
    }
-
+   const generateStyle = () => {
+      return {
+         backgroundColor: snap.color,
+      }
+   }
    return (
       <AnimatePresence>
          {!snap.intro && (
@@ -94,17 +98,29 @@ const Customizer = () => {
                   {...fadeAnimation}
                >
                   <div className="flex items-center min-h-screen">
-                     <div className="editortabs-container tabs">
-                        {EditorTabs.map((tab) => (
-                           <Tab
-                              key={tab.name}
-                              tab={tab}
-                              handleClick={() => setActiveEditorTab(tab.name)}
-                           />
-                        ))}
-
-                        {generateTabContent()}
-                     </div>
+                     <button
+                        style={generateStyle()}
+                        className={isActive
+                           ? "fixed top-5 left-5 text-white bg-black flex-1 rounded-md w-fit px-4 py-2.5 font-bold text-sm"
+                           : `fixed left-5 flex-1 rounded-md w-fit px-4 py-2.5 font-bold text-sm text-white bg-${state.color}`
+                        }
+                        onClick={() => setIsActive(!isActive)}
+                     >
+                        {isActive ? "Close Editor" : "Start Editor"}
+                     </button>
+                     {
+                        isActive && (
+                           <div className="editortabs-container tabs">
+                              {EditorTabs.map((tab) => (
+                                 <Tab
+                                    key={tab.name}
+                                    tab={tab}
+                                    handleClick={() => setActiveEditorTab(tab.name)}
+                                 />
+                              ))}
+                              {generateTabContent()}
+                           </div>
+                        )}
                   </div>
                </motion.div>
 
